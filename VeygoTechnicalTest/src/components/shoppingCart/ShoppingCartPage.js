@@ -18,12 +18,14 @@ class ShoppingCartPage extends React.Component {
     }
   }
 
-  handleAddToCart = async (item) => {
-    toast.success(item.name + " Added To Cart");
+  clearCart = async () => {
+    toast.success("Cart Cleared");
     try {
-      await this.props.actions.addItemToCart(item);
+      await this.props.actions.clearCart();
     } catch (error) {
-      toast.error("Delete Failed. " + error.message, { autoClose: false });
+      toast.error("Clearing Cart Failed. " + error.message, {
+        autoClose: false,
+      });
     }
   };
 
@@ -36,6 +38,9 @@ class ShoppingCartPage extends React.Component {
             handleAddToCart={this.handleAddToCart}
             cartItems={this.props.cartItems}
           />
+          <button className="btn btn-dark" onClick={() => this.clearCart()}>
+            Clear Cart
+          </button>
         </>
       </>
     );
@@ -60,6 +65,7 @@ function mapDispatchToProps(dispatch) {
         shoppingCartActions.getShoppingCartItems,
         dispatch
       ),
+      clearCart: bindActionCreators(shoppingCartActions.clearCart, dispatch),
     },
   };
 }

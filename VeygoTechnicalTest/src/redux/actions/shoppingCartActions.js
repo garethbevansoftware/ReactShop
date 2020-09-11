@@ -12,8 +12,8 @@ export function getShoppingCartItems(items) {
   return { type: types.GET_SHOPPING_CART_ITEMS, items };
 }
 
-export function clearItems(items) {
-  return { type: types.CLEAR_ITEMS, items };
+export function clearCart() {
+  return { type: types.CLEAR_CART };
 }
 
 // export function loadCourses() {
