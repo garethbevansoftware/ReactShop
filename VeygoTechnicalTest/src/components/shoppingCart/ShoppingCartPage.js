@@ -29,13 +29,24 @@ class ShoppingCartPage extends React.Component {
     }
   };
 
+  handleRemoveItem = async (item) => {
+    toast.success(item.name + "Successfully Removed");
+    try {
+      await this.props.actions.removeItemFromCart(item);
+    } catch (error) {
+      toast.error("Clearing Cart Failed. " + error.message, {
+        autoClose: false,
+      });
+    }
+  };
+
   render() {
     return (
       <>
         <h2>Products</h2>
         <>
           <ShoppingCartItems
-            handleAddToCart={this.handleAddToCart}
+            handleRemoveItem={this.handleRemoveItem}
             cartItems={this.props.cartItems}
           />
           <button className="btn btn-dark" onClick={() => this.clearCart()}>
@@ -66,6 +77,10 @@ function mapDispatchToProps(dispatch) {
         dispatch
       ),
       clearCart: bindActionCreators(shoppingCartActions.clearCart, dispatch),
+      removeItemFromCart: bindActionCreators(
+        shoppingCartActions.removeItemFromCart,
+        dispatch
+      ),
     },
   };
 }

@@ -26,7 +26,7 @@ export default function shoppingCartReducer(
     case types.GET_ITEM_LIST:
       return action.items;
     case types.REMOVE_ITEM_FROM_CART:
-      return state;
+      return state.filter((item) => item.id !== action.item.id);
     case types.CLEAR_CART:
       return [];
     default:

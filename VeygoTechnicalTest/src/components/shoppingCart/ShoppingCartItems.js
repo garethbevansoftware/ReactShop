@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ShoppingCartItems = ({ cartItems, handleAddToCart }) => (
+const ShoppingCartItems = ({ cartItems, handleRemoveItem }) => (
   <table className="table">
     <thead>
       <tr>
@@ -19,12 +19,12 @@ const ShoppingCartItems = ({ cartItems, handleAddToCart }) => (
             <td>£{item.price}</td>
             <td>{item.quantity}</td>
             <td>
-              {/* <button
-                className="btn btn-dark"
-                onClick={() => handleAddToCart(item)}
+              <button
+                className="btn btn-danger"
+                onClick={() => handleRemoveItem(item)}
               >
-                Add To Cart
-              </button> */}
+                Remove
+              </button>
             </td>
           </tr>
         );
