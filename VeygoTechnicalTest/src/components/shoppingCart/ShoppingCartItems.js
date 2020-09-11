@@ -19,12 +19,12 @@ const ShoppingCartItems = ({ cartItems, handleAddToCart }) => (
             <td>£{item.price}</td>
             <td>{item.quantity}</td>
             <td>
-              <button
+              {/* <button
                 className="btn btn-dark"
                 onClick={() => handleAddToCart(item)}
               >
                 Add To Cart
-              </button>
+              </button> */}
             </td>
           </tr>
         );
