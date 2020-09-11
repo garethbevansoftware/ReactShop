@@ -40,6 +40,18 @@ class ShoppingCartPage extends React.Component {
     }
   };
 
+  calculateTotal() {
+    const { cartItems } = this.props;
+    if (cartItems.length > 0) {
+      var result = cartItems
+        .reduce(function (sum, item) {
+          return sum + item.price * item.quantity;
+        }, 0)
+        .toFixed(2);
+      return result;
+    }
+  }
+
   render() {
     return (
       <>
@@ -48,6 +60,7 @@ class ShoppingCartPage extends React.Component {
           <ShoppingCartItems
             handleRemoveItem={this.handleRemoveItem}
             cartItems={this.props.cartItems}
+            total={this.calculateTotal()}
           />
           <button className="btn btn-dark" onClick={() => this.clearCart()}>
             Clear Cart

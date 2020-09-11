@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ShoppingCartItems = ({ cartItems, handleRemoveItem }) => (
+const ShoppingCartItems = ({ cartItems, handleRemoveItem, total }) => (
   <table className="table">
     <thead>
       <tr>
@@ -29,13 +29,16 @@ const ShoppingCartItems = ({ cartItems, handleRemoveItem }) => (
           </tr>
         );
       })}
+      <tr>
+        <td>Total</td>
+        <td>£{total}</td>
+      </tr>
     </tbody>
   </table>
 );
 
 ShoppingCartItems.propTypes = {
   cartItems: PropTypes.array.isRequired,
-  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCartItems;
