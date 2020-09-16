@@ -42,7 +42,7 @@ const ShoppingCartItems = ({ cartItems, handleRemoveItem, total }) => (
 ShoppingCartItems.propTypes = {
   cartItems: PropTypes.array.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,
-  total: PropTypes.number.isRequired,
+  total: PropTypes.string.isRequired,
 };
 
 export default ShoppingCartItems;

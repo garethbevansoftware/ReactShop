@@ -69,7 +69,7 @@ class ShoppingCartPage extends React.Component {
         .toFixed(2);
       return result;
     }
-    return 0;
+    return "0";
   }
 
   render() {
@@ -117,7 +117,7 @@ class ShoppingCartPage extends React.Component {
               ></ReceiptModal>
             </ModalBody>
             <ModalFooter>
-              <Button color="secondary" onClick={this.toggle}>
+              <Button color="secondary" onClick={this.toggleRecieptModal}>
                 Close
               </Button>
             </ModalFooter>
