@@ -33,7 +33,6 @@ const RecieptModal = ({ cartItems, total }) => (
 
 RecieptModal.propTypes = {
   cartItems: PropTypes.array.isRequired,
-  handleRemoveItem: PropTypes.object.isRequired,
   total: PropTypes.number,
 };
 
