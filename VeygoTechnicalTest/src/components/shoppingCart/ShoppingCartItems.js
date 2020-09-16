@@ -6,8 +6,8 @@ const ShoppingCartItems = ({ cartItems, handleRemoveItem, total }) => (
     <thead>
       <tr>
         <th>Name</th>
+        <th>Quantity</th>
         <th>Price</th>
-        <th>Amount</th>
         <th></th>
       </tr>
     </thead>
@@ -16,8 +16,8 @@ const ShoppingCartItems = ({ cartItems, handleRemoveItem, total }) => (
         return (
           <tr key={item.id}>
             <td>{item.name}</td>
-            <td>£{item.price}</td>
             <td>{item.quantity}</td>
+            <td>£{item.price}</td>
             <td>
               <button
                 className="btn btn-danger"
@@ -30,8 +30,10 @@ const ShoppingCartItems = ({ cartItems, handleRemoveItem, total }) => (
         );
       })}
       <tr>
+        <td></td>
         <td>Total</td>
         <td>£{total}</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -39,6 +41,8 @@ const ShoppingCartItems = ({ cartItems, handleRemoveItem, total }) => (
 
 ShoppingCartItems.propTypes = {
   cartItems: PropTypes.array.isRequired,
+  handleRemoveItem: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default ShoppingCartItems;

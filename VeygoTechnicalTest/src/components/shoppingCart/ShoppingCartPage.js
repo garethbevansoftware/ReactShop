@@ -4,11 +4,24 @@ import * as shoppingCartActions from "../../redux/actions/shoppingCartActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
+import ReceiptModal from "./reciept/RecieptPage";
 import ShoppingCartItems from "./ShoppingCartItems";
+
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Container,
+  Row,
+  Col,
+} from "reactstrap";
 
 class ShoppingCartPage extends React.Component {
   state = {
     redirectToAddCoursePage: false,
+    showRecieptModal: false,
   };
 
   componentDidMount() {
@@ -27,6 +40,12 @@ class ShoppingCartPage extends React.Component {
         autoClose: false,
       });
     }
+  };
+
+  toggleRecieptModal = async () => {
+    this.setState({
+      showRecieptModal: !this.state.showRecieptModal,
+    });
   };
 
   handleRemoveItem = async (item) => {
@@ -50,21 +69,59 @@ class ShoppingCartPage extends React.Component {
         .toFixed(2);
       return result;
     }
+    return 0;
   }
 
   render() {
     return (
       <>
-        <h2>Products</h2>
+        <h2>Shopping Cart</h2>
         <>
           <ShoppingCartItems
             handleRemoveItem={this.handleRemoveItem}
             cartItems={this.props.cartItems}
             total={this.calculateTotal()}
           />
-          <button className="btn btn-dark" onClick={() => this.clearCart()}>
-            Clear Cart
-          </button>
+          <Container fluid={true}>
+            <Row xs="3">
+              <Col>
+                <Button color="danger" onClick={() => this.clearCart()}>
+                  Clear Cart
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  color="primary"
+                  onClick={() => this.toggleRecieptModal()}
+                >
+                  Show Reciept
+                </Button>
+              </Col>
+            </Row>
+          </Container>
+          <Modal
+            isOpen={this.state.showRecieptModal}
+            toggle={this.toggleRecieptModal}
+          >
+            <ModalHeader toggle={this.toggle}>
+              <Container>
+                <Row>
+                  <h1 className="text-center">Veygo Shop</h1>
+                </Row>
+              </Container>
+            </ModalHeader>
+            <ModalBody>
+              <ReceiptModal
+                cartItems={this.props.cartItems}
+                total={this.calculateTotal()}
+              ></ReceiptModal>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.toggle}>
+                Close
+              </Button>
+            </ModalFooter>
+          </Modal>
         </>
       </>
     );
