@@ -33,7 +33,7 @@ const RecieptModal = ({ cartItems, total }) => (
 
 RecieptModal.propTypes = {
   cartItems: PropTypes.array.isRequired,
-  total: PropTypes.number,
+  total: PropTypes.string.isRequired,
 };
 
 export default RecieptModal;

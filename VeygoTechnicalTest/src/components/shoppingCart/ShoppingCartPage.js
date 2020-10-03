@@ -5,7 +5,7 @@ import * as discountActions from "../../redux/actions/discountActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
-import ReceiptModal from "./reciept/RecieptPage";
+import ReceiptModal from "./reciept/RecieptModal";
 import ShoppingCartItems from "./ShoppingCartItems";
 
 import {
@@ -17,7 +17,6 @@ import {
   Container,
   Row,
   Col,
-  Form,
   FormGroup,
   Input,
 } from "reactstrap";
@@ -81,7 +80,8 @@ class ShoppingCartPage extends React.Component {
     return 0;
   }
 
-  handleApplyDiscount = async () => {
+  handleApplyDiscount = () => {
+    const { discounts, actions } = this.props;
     var discount = this.state.discountTypes.find(
       (item) => item.name === this.state.discountCode
     );
@@ -90,14 +90,14 @@ class ShoppingCartPage extends React.Component {
       return;
     }
 
-    if (this.props.discounts.contains(discount)) {
+    if (discounts.find((item) => item.id === discount.id)) {
       toast.error("Discount Already Applied");
       return;
     }
 
     toast.success("Discount Successfully Applied");
     try {
-      await this.props.actions.applyDiscount(discount);
+      actions.applyDiscount(discount);
     } catch (error) {
       toast.error("Failed To Apply Discount " + error.message, {
         autoClose: false,
@@ -105,11 +105,11 @@ class ShoppingCartPage extends React.Component {
     }
   };
 
-  handleChange({ target }) {
+  handleChange = ({ target }) => {
     this.setState({
       [target.name]: target.value,
     });
-  }
+  };
 
   render() {
     return (
