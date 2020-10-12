@@ -9,7 +9,7 @@ export default function shoppingCartReducer(
     case types.ADD_ITEM_TO_CART:
       var item = state.find((item) => item.id === action.item.id);
       if (item) {
-        return state.map((item, index) => {
+        return state.map((item) => {
           if (item.id === action.item.id) {
             return {
               ...item,
@@ -23,8 +23,6 @@ export default function shoppingCartReducer(
       }
     case types.GET_SHOPPING_CART_ITEMS:
       return state;
-    case types.GET_ITEM_LIST:
-      return action.items;
     case types.REMOVE_ITEM_FROM_CART:
       return state.filter((item) => item.id !== action.item.id);
     case types.CLEAR_CART:
